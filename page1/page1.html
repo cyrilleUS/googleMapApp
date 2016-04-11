@@ -1,0 +1,54 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Companies map</ion-title>
+</ion-navbar>
+
+<ion-content padding class="page1">
+
+  <ion-card>
+    <ion-card-header>
+      <b>Search company</b>
+    </ion-card-header>
+      <form [ngFormModel]="searchForm" (submit)="search($event)">
+        <ion-item>
+          <ion-input id="search" ngControl="searchString" type="text" placeholder="Company" value=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label id="radiusLabel" for="radiusInput">Distance from me</ion-label>
+          <ion-select id="radiusInput" [(ngModel)]="currentRadius">
+            <ion-option *ngFor="#r of radius" value="{{r}}">{{r}}km</ion-option>
+          </ion-select>
+        </ion-item>
+        <button block type="submit">Search</button>
+      </form>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <b>Explore companies</b>
+    </ion-card-header>
+
+    <ion-list *ngFor="#company of companies">
+      <button ion-item (click)="showCompany(company)">
+        {{company.name}}<br>{{company.address}}
+      </button>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <b>Credits</b>
+    </ion-card-header>
+
+    <ion-list>
+      <p ion-item>
+        Uniquesound :
+        <br>
+        Cyrille Vanhulle
+      </p>
+
+    </ion-list>
+  </ion-card>
+</ion-content>
